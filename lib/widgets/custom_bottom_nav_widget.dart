@@ -5,20 +5,46 @@ class CustomBottomNavWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-      color: const Color(0xFF1D1D2B),
+    return const BottomAppBar(
+      color: Color(0xFF1D1D2B),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          navBarItem(Icons.shopping_cart_outlined, "Carrinho", 0),
-          navBarItem(Icons.home_outlined, "Home", 1),
-          navBarItem(Icons.person_2_outlined, "Perfil", 2),
+          _NavBarItem(
+            icon: Icons.shopping_cart_outlined,
+            label: "Carrinho",
+            index: 0,
+          ),
+          _NavBarItem(
+            icon: Icons.home_outlined,
+            label: "Home",
+            index: 1,
+          ),
+          _NavBarItem(
+            icon: Icons.person_2_outlined,
+            label: "Perfil",
+            index: 2,
+          ),
         ],
       ),
     );
   }
+}
 
-  Widget navBarItem(IconData icon, String label, int index) {
+class _NavBarItem extends StatelessWidget {
+  const _NavBarItem({
+    super.key,
+    required this.icon,
+    required this.label,
+    required this.index,
+  });
+
+  final IconData icon;
+  final String label;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {},
       child: Row(
