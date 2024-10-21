@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:wemovies_mobile_test/models/card_movie_model.dart';
 import 'package:wemovies_mobile_test/repositories/card_movie_repository.dart';
-import 'package:wemovies_mobile_test/widgets/card_movie_widget.dart';
 
+import '../models/card_movie_model.dart';
+import '../widgets/card_movie_widget.dart';
 import '../widgets/custom_bottom_nav_widget.dart';
 
 class HomeScreen extends StatefulWidget {

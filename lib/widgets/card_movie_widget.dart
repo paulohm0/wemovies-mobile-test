@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class CardMovie extends StatelessWidget {
@@ -30,12 +31,18 @@ class CardMovie extends StatelessWidget {
               ),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.blue,
                   borderRadius: BorderRadius.circular(5),
                 ),
                 width: 147,
                 height: 188,
-                child: Image.network(imageMovie!),
+                child: CachedNetworkImage(
+                  imageUrl: imageMovie!,
+                  placeholder: (context, url) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                ),
               ),
             ),
             Text(
@@ -57,7 +64,7 @@ class CardMovie extends StatelessWidget {
                   right: 16.0, left: 16.0, bottom: 16.0, top: 8.0),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.lightBlue,
+                  backgroundColor: Colors.blue,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 20,
                     vertical: 15,
