@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
-class ShoppingCartScreen extends StatefulWidget {
-  const ShoppingCartScreen({super.key});
+import '../repositories/card_movie_repository.dart';
+
+class ShoppingView extends StatefulWidget {
+  const ShoppingView({super.key, required this.movieRepository});
+
+  final CardMovieRepository movieRepository;
 
   @override
-  State<ShoppingCartScreen> createState() => _ShoppingCartScreenState();
+  State<ShoppingView> createState() => _ShoppingViewState();
 }
 
-class _ShoppingCartScreenState extends State<ShoppingCartScreen> {
+class _ShoppingViewState extends State<ShoppingView> {
   @override
   Widget build(BuildContext context) {
     return Container(

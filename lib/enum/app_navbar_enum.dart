@@ -12,10 +12,6 @@ enum AppNavBarEnum {
   profile(
     icon: Icons.person_2_outlined,
     label: "Perfil",
-  ),
-  deposit(
-    icon: Icons.baby_changing_station,
-    label: "Deposito",
   );
 
   final IconData icon;
@@ -25,13 +21,4 @@ enum AppNavBarEnum {
     required this.icon,
     required this.label,
   });
-}
-
-final class HomeViewModel extends ChangeNotifier {
-  AppNavBarEnum selectedIndex = AppNavBarEnum.home;
-
-  void onItemTapped(AppNavBarEnum index) {
-    selectedIndex = index;
-    notifyListeners();
-  }
 }

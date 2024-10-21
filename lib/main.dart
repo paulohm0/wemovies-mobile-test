@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wemovies_mobile_test/screens/home_screen.dart';
+import 'package:wemovies_mobile_test/screens/main_screen.dart';
 
 void main() {
   runApp(const MyApp());
