@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wemovies_mobile_test/viewmodel/main_view_model.dart';
 
 import '../models/card_movie_model.dart';
 import '../repositories/card_movie_repository.dart';
@@ -6,8 +7,13 @@ import '../widgets/card_movie_widget.dart';
 
 final class HomeView extends StatelessWidget {
   final CardMovieRepository movieRepository;
+  final MainViewModel viewModel;
 
-  const HomeView({super.key, required this.movieRepository});
+  const HomeView({
+    super.key,
+    required this.movieRepository,
+    required this.viewModel,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +44,10 @@ final class HomeView extends StatelessWidget {
                 future: movieRepository.getMovies(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(
+                        child: CircularProgressIndicator(
+                      color: Colors.black,
+                    ));
                   } else if (snapshot.hasError) {
                     return const Text('Sem Conexão com a Internet');
                   } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
@@ -52,9 +61,8 @@ final class HomeView extends StatelessWidget {
                         final CardMovieModel cardMovieModel =
                             cardMovieList[index];
                         return CardMovie(
-                          imageMovie: cardMovieModel.imageMovie,
-                          priceMovie: cardMovieModel.priceMovie,
-                          titleMovie: cardMovieModel.titleMovie,
+                          cardMovieModel: cardMovieModel,
+                          viewModel: viewModel,
                         );
                       },
                     );

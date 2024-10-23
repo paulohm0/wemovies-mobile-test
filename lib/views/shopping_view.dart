@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:wemovies_mobile_test/viewmodel/main_view_model.dart';
+import 'package:wemovies_mobile_test/widgets/shopping_card_empty_widget.dart';
+import 'package:wemovies_mobile_test/widgets/shopping_movie_list_widget.dart';
 
 import '../repositories/card_movie_repository.dart';
 
-class ShoppingView extends StatefulWidget {
-  const ShoppingView({super.key, required this.movieRepository});
+class ShoppingView extends StatelessWidget {
+  const ShoppingView(
+      {super.key, required this.movieRepository, required this.viewModel});
 
   final CardMovieRepository movieRepository;
+  final MainViewModel viewModel;
 
-  @override
-  State<ShoppingView> createState() => _ShoppingViewState();
-}
-
-class _ShoppingViewState extends State<ShoppingView> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,21 +30,16 @@ class _ShoppingViewState extends State<ShoppingView> {
                   fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 24),
-            Expanded(
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const SingleChildScrollView(
-                  child: Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Text(''),
-                  ),
-                ),
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(5),
               ),
-            )
+              child: viewModel.shoppingList.isEmpty
+                  ? ShoppingCardEmptyWidget(viewModel: viewModel)
+                  : const PurchasedMovieListWidget(),
+            ),
           ],
         ),
       ),

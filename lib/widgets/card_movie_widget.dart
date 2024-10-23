@@ -1,18 +1,23 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:wemovies_mobile_test/models/card_movie_model.dart';
+import 'package:wemovies_mobile_test/viewmodel/main_view_model.dart';
 
-class CardMovie extends StatelessWidget {
-  final String? titleMovie;
-  final double? priceMovie;
-  final String? imageMovie;
+class CardMovie extends StatefulWidget {
+  final CardMovieModel cardMovieModel;
+  final MainViewModel viewModel;
 
   const CardMovie({
     super.key,
-    required this.titleMovie,
-    required this.priceMovie,
-    required this.imageMovie,
+    required this.viewModel,
+    required this.cardMovieModel,
   });
 
+  @override
+  State<CardMovie> createState() => _CardMovieState();
+}
+
+class _CardMovieState extends State<CardMovie> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -36,7 +41,7 @@ class CardMovie extends StatelessWidget {
                 width: 147,
                 height: 188,
                 child: CachedNetworkImage(
-                  imageUrl: imageMovie!,
+                  imageUrl: widget.cardMovieModel.imageMovie!,
                   placeholder: (context, url) {
                     return const Center(
                       child: CircularProgressIndicator(),
@@ -46,14 +51,14 @@ class CardMovie extends StatelessWidget {
               ),
             ),
             Text(
-              titleMovie ?? 'Nome não Disponível',
+              widget.cardMovieModel.titleMovie ?? 'Nome não Disponível',
               style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w700,
               ),
             ),
             Text(
-              'R\$ ${priceMovie ?? 'Valor não Disponível'}',
+              'R\$ ${widget.cardMovieModel.priceMovie ?? 'Valor não Disponível'}',
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
@@ -64,7 +69,10 @@ class CardMovie extends StatelessWidget {
                   right: 16.0, left: 16.0, bottom: 16.0, top: 8.0),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: widget.viewModel.shoppingList.any((movie) =>
+                          movie.idMovie == widget.cardMovieModel.idMovie)
+                      ? Colors.green
+                      : Colors.blue,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 20,
                     vertical: 15,
@@ -73,21 +81,24 @@ class CardMovie extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                onPressed: () {},
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                onPressed: () {
+                  widget.viewModel.addMovieToCart(widget.cardMovieModel);
+                  widget.viewModel.getMovie(widget.cardMovieModel);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.add_shopping_cart,
                         color: Colors.white,
                       ),
                       Text(
-                        '0',
-                        style: TextStyle(color: Colors.white),
+                        widget.viewModel.contador.toString(),
+                        style: const TextStyle(color: Colors.white),
                       ),
-                      Text(
+                      const Text(
                         'ADICIONAR AO CARRINHO',
                         style: TextStyle(
                           color: Colors.white,

@@ -48,11 +48,16 @@ class _HomeScreenState extends State<HomeScreen> {
         listenable: viewModel,
         builder: (context, _) {
           return switch (viewModel.selectedIndex) {
-            AppNavBarEnum.shopping =>
-              ShoppingView(movieRepository: movieRepository),
+            AppNavBarEnum.shopping => ShoppingView(
+                movieRepository: movieRepository,
+                viewModel: viewModel,
+              ),
             AppNavBarEnum.profile =>
               ProfileView(movieRepository: movieRepository),
-            _ => HomeView(movieRepository: movieRepository),
+            _ => HomeView(
+                movieRepository: movieRepository,
+                viewModel: viewModel,
+              ),
           };
         },
       ),

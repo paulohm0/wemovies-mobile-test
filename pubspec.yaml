@@ -8,6 +8,7 @@ environment:
   sdk: '>=3.4.3 <4.0.0'
 
 dependencies:
+  collection: ^1.18.0
   cached_network_image: ^3.4.1
   dio: ^5.7.0
   google_fonts: ^6.2.1
