@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:wemovies_mobile_test/viewmodel/main_view_model.dart';
 import 'package:wemovies_mobile_test/widgets/shopping_card_movie_widget.dart';
 
-class PurchasedMovieListWidget extends StatelessWidget {
-  const PurchasedMovieListWidget({super.key});
+class ShoppingMovieListWidget extends StatelessWidget {
+  const ShoppingMovieListWidget({
+    super.key,
+    required this.viewModel,
+  });
+
+  final MainViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -10,12 +16,22 @@ class PurchasedMovieListWidget extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
-          ShoppingCardMovieWidget(),
-          ShoppingCardMovieWidget(),
-          const Row(
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: viewModel.shoppingList.length,
+            scrollDirection: Axis.vertical,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              return ShoppingCardMovieWidget(
+                viewModel: viewModel,
+                cardMovieModel: viewModel.shoppingList[index],
+              );
+            },
+          ),
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 'TOTAL',
                 style: TextStyle(
                   fontSize: 14,
@@ -24,8 +40,8 @@ class PurchasedMovieListWidget extends StatelessWidget {
                 ),
               ),
               Text(
-                'R\$ 29,90',
-                style: TextStyle(
+                'R\$ ${viewModel.getSumPrices().toString()}',
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
                 ),

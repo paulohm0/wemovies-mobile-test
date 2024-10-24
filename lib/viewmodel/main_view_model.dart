@@ -7,7 +7,6 @@ import '../models/card_movie_model.dart';
 final class MainViewModel extends ChangeNotifier {
   AppNavBarEnum selectedIndex = AppNavBarEnum.home;
   List<CardMovieModel> shoppingList = [];
-  int contador = 0;
 
   void getGroupedById() {
     groupBy(shoppingList, (CardMovieModel item) => item.idMovie);
@@ -23,12 +22,17 @@ final class MainViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getMovie(CardMovieModel movie) {
-    for (var shoooppingList in shoppingList) {
-      if (shoooppingList.idMovie == movie.idMovie) {
-        contador++;
-        break;
-      }
+  double getSumPrices() {
+    double total = 0.0;
+    for (CardMovieModel price in shoppingList) {
+      total += price.priceMovie ?? 0.00;
     }
+    return total;
+  }
+
+  int countItensShop(CardMovieModel movieModel) {
+    return shoppingList.where((movie) {
+      return movie.idMovie == movieModel.idMovie;
+    }).length;
   }
 }

@@ -58,7 +58,7 @@ class _CardMovieState extends State<CardMovie> {
               ),
             ),
             Text(
-              'R\$ ${widget.cardMovieModel.priceMovie ?? 'Valor não Disponível'}',
+              'R\$ ${widget.cardMovieModel.priceMovie != null ? widget.cardMovieModel.priceMovie!.toStringAsFixed(2) : 'Valor não Disponível'}',
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
@@ -83,7 +83,6 @@ class _CardMovieState extends State<CardMovie> {
                 ),
                 onPressed: () {
                   widget.viewModel.addMovieToCart(widget.cardMovieModel);
-                  widget.viewModel.getMovie(widget.cardMovieModel);
                 },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -95,7 +94,9 @@ class _CardMovieState extends State<CardMovie> {
                         color: Colors.white,
                       ),
                       Text(
-                        widget.viewModel.contador.toString(),
+                        widget.viewModel
+                            .countItensShop(widget.cardMovieModel)
+                            .toString(),
                         style: const TextStyle(color: Colors.white),
                       ),
                       const Text(

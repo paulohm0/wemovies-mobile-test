@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:wemovies_mobile_test/models/card_movie_model.dart';
+import 'package:wemovies_mobile_test/viewmodel/main_view_model.dart';
 
 class ShoppingCardMovieWidget extends StatelessWidget {
-  const ShoppingCardMovieWidget({super.key});
+  const ShoppingCardMovieWidget({
+    super.key,
+    required this.cardMovieModel, required this.viewModel,
+  });
+
+  final CardMovieModel cardMovieModel;
+  final MainViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {
     DateTime currentDate = DateTime.now();
     String formattedDate =
         "${currentDate.day}/${currentDate.month}/${currentDate.year}";
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -16,7 +25,7 @@ class ShoppingCardMovieWidget extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(2),
               ),
               width: 56,
@@ -25,7 +34,7 @@ class ShoppingCardMovieWidget extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(2),
                 child: Image.network(
-                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU4pwQslyMnG0Vr9DQYw9dLb3ATY3nWTQ-iA&s',
+                  cardMovieModel.imageMovie.toString(),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -36,9 +45,10 @@ class ShoppingCardMovieWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Nome do Filme',
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+                  Text(
+                    cardMovieModel.titleMovie.toString(),
+                    style: const TextStyle(
+                        fontSize: 14, fontWeight: FontWeight.w700),
                   ),
                   RichText(
                     text: TextSpan(
@@ -104,7 +114,9 @@ class ShoppingCardMovieWidget extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    viewModel.addMovieToCart(cardMovieModel);
+                  },
                   icon: const Icon(
                     Icons.add,
                     color: Colors.blue,
@@ -113,10 +125,10 @@ class ShoppingCardMovieWidget extends StatelessWidget {
                 ),
               ],
             ),
-            const Column(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(
+                const Text(
                   'SUBTOTAL',
                   style: TextStyle(
                     color: Colors.grey,
@@ -125,8 +137,8 @@ class ShoppingCardMovieWidget extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'R\$ 29,90',
-                  style: TextStyle(
+                  cardMovieModel.priceMovie!.toStringAsFixed(2),
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
                   ),
