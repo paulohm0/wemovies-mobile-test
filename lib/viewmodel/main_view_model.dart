@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 import '../enum/app_navbar_enum.dart';
@@ -8,14 +7,12 @@ final class MainViewModel extends ChangeNotifier {
   AppNavBarEnum selectedIndex = AppNavBarEnum.home;
   List<CardMovieModel> shoppingList = [];
 
-  Map<int, List<CardMovieModel>> getGroupedById() {
-    return groupBy(shoppingList, (CardMovieModel movie) => movie.idMovie!);
-  }
-
   void onItemTapped(AppNavBarEnum index) {
     selectedIndex = index;
     notifyListeners();
   }
+
+  Set<CardMovieModel> get getUniqueShoppingList => shoppingList.toSet();
 
   void addMovieToCart(CardMovieModel movie) {
     shoppingList.add(movie);

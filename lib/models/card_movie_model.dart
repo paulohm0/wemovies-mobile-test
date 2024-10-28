@@ -19,4 +19,21 @@ class CardMovieModel {
       imageMovie: json["image"],
     );
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CardMovieModel &&
+          runtimeType == other.runtimeType &&
+          idMovie == other.idMovie &&
+          titleMovie == other.titleMovie &&
+          priceMovie == other.priceMovie &&
+          imageMovie == other.imageMovie;
+
+  @override
+  int get hashCode =>
+      idMovie.hashCode ^
+      titleMovie.hashCode ^
+      priceMovie.hashCode ^
+      imageMovie.hashCode;
 }
