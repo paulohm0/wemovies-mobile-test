@@ -12,19 +12,25 @@ class ShoppingMovieListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List shop = viewModel.shoppingList.where((movie) {
+      return viewModel.shoppingList
+              .indexWhere((m) => m.idMovie == movie.idMovie) ==
+          viewModel.shoppingList.indexOf(movie);
+    }).toList();
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
           ListView.builder(
             shrinkWrap: true,
-            itemCount: viewModel.shoppingList.length,
+            itemCount: shop.length,
             scrollDirection: Axis.vertical,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               return ShoppingCardMovieWidget(
                 viewModel: viewModel,
-                cardMovieModel: viewModel.shoppingList[index],
+                cardMovieModel: shop[index],
               );
             },
           ),

@@ -29,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF2F2E41),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(64.0),
         child: AppBar(
@@ -42,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           backgroundColor: const Color(0xFF1D1D2B),
+          //const Color(0xFF1D1D2B),
         ),
       ),
       body: ListenableBuilder(

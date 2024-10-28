@@ -8,8 +8,8 @@ final class MainViewModel extends ChangeNotifier {
   AppNavBarEnum selectedIndex = AppNavBarEnum.home;
   List<CardMovieModel> shoppingList = [];
 
-  void getGroupedById() {
-    groupBy(shoppingList, (CardMovieModel item) => item.idMovie);
+  Map<int, List<CardMovieModel>> getGroupedById() {
+    return groupBy(shoppingList, (CardMovieModel movie) => movie.idMovie!);
   }
 
   void onItemTapped(AppNavBarEnum index) {
@@ -19,6 +19,11 @@ final class MainViewModel extends ChangeNotifier {
 
   void addMovieToCart(CardMovieModel movie) {
     shoppingList.add(movie);
+    notifyListeners();
+  }
+
+  void removeMovieToCart(CardMovieModel movie) {
+    shoppingList.remove(movie);
     notifyListeners();
   }
 

@@ -3,7 +3,7 @@ import 'package:wemovies_mobile_test/viewmodel/main_view_model.dart';
 
 import '../models/card_movie_model.dart';
 import '../repositories/card_movie_repository.dart';
-import '../widgets/card_movie_widget.dart';
+import '../widgets/home_card_movie_widget.dart';
 
 final class HomeView extends StatelessWidget {
   final CardMovieRepository movieRepository;
@@ -60,7 +60,7 @@ final class HomeView extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final CardMovieModel cardMovieModel =
                             cardMovieList[index];
-                        return CardMovie(
+                        return HomeCardMovieWidget(
                           cardMovieModel: cardMovieModel,
                           viewModel: viewModel,
                         );

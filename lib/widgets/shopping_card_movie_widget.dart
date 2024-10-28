@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:wemovies_mobile_test/models/card_movie_model.dart';
 import 'package:wemovies_mobile_test/viewmodel/main_view_model.dart';
@@ -5,7 +6,8 @@ import 'package:wemovies_mobile_test/viewmodel/main_view_model.dart';
 class ShoppingCardMovieWidget extends StatelessWidget {
   const ShoppingCardMovieWidget({
     super.key,
-    required this.cardMovieModel, required this.viewModel,
+    required this.cardMovieModel,
+    required this.viewModel,
   });
 
   final CardMovieModel cardMovieModel;
@@ -30,11 +32,10 @@ class ShoppingCardMovieWidget extends StatelessWidget {
               ),
               width: 56,
               height: 72,
-              //Todo: Substituir image.network, pela imagem do filme vinda da api
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(2),
-                child: Image.network(
-                  cardMovieModel.imageMovie.toString(),
+                child: CachedNetworkImage(
+                  imageUrl: cardMovieModel.imageMovie.toString(),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -91,7 +92,9 @@ class ShoppingCardMovieWidget extends StatelessWidget {
             Row(
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    viewModel.removeMovieToCart(cardMovieModel);
+                  },
                   icon: const Icon(
                     Icons.remove,
                     color: Colors.blue,
@@ -105,9 +108,9 @@ class ShoppingCardMovieWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                     color: Colors.white,
                   ),
-                  child: const Text(
-                    '1',
-                    style: TextStyle(
+                  child: Text(
+                    viewModel.countItensShop(cardMovieModel).toString(),
+                    style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                     ),

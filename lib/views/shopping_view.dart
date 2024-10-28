@@ -15,9 +15,8 @@ class ShoppingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
-        color: const Color(0xFF2F2E41),
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Column(

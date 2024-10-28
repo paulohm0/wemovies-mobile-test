@@ -3,21 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:wemovies_mobile_test/models/card_movie_model.dart';
 import 'package:wemovies_mobile_test/viewmodel/main_view_model.dart';
 
-class CardMovie extends StatefulWidget {
+class HomeCardMovieWidget extends StatefulWidget {
   final CardMovieModel cardMovieModel;
   final MainViewModel viewModel;
 
-  const CardMovie({
+  const HomeCardMovieWidget({
     super.key,
     required this.viewModel,
     required this.cardMovieModel,
   });
 
   @override
-  State<CardMovie> createState() => _CardMovieState();
+  State<HomeCardMovieWidget> createState() => _HomeCardMovieWidgetState();
 }
 
-class _CardMovieState extends State<CardMovie> {
+class _HomeCardMovieWidgetState extends State<HomeCardMovieWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
