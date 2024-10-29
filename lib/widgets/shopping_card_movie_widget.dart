@@ -140,7 +140,9 @@ class ShoppingCardMovieWidget extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  cardMovieModel.priceMovie!.toStringAsFixed(2),
+                  viewModel
+                      .sumMoviesList(cardMovieModel, (cardMovieModel.idMovie))
+                      .toStringAsFixed(2),
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,

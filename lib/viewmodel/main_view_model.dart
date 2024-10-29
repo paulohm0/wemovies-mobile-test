@@ -37,4 +37,13 @@ final class MainViewModel extends ChangeNotifier {
       return movie.idMovie == movieModel.idMovie;
     }).length;
   }
+
+  double sumMoviesList(CardMovieModel movieModel, int? iD) {
+    return shoppingList.where((movie) {
+      return movie.idMovie == iD;
+    }).fold(
+      0.0,
+      (soma, movie) => soma + (movie.priceMovie ?? 0.0),
+    );
+  }
 }

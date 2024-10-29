@@ -41,7 +41,7 @@ class ShoppingMovieListWidget extends StatelessWidget {
                 ),
               ),
               Text(
-                'R\$ ${viewModel.getSumPrices().toString()}',
+                'R\$ ${viewModel.getSumPrices().toStringAsFixed(2)}',
                 style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
