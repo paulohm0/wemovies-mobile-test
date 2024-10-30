@@ -1,12 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:wemovies_mobile_test/repositories/card_movie_repository.dart';
 
 import '../enum/app_navbar_enum.dart';
 import '../models/card_movie_model.dart';
 
+enum HomeState { loading, loaded, error }
+
 final class MainViewModel extends ChangeNotifier {
+  final CardMovieRepository _cardMovieRepository;
+
   AppNavBarEnum selectedIndex = AppNavBarEnum.home;
   List<CardMovieModel> shoppingList = [];
   bool isOrderFinalized = false;
+
+  List<CardMovieModel> listFromMovieApi = [];
+
+  HomeState homeState = HomeState.loading;
+
+  bool isLoading = false;
+  bool hasError = false;
+
+  MainViewModel({
+    required CardMovieRepository cardMovieRepository,
+  }) : _cardMovieRepository = cardMovieRepository;
+
+  Future<void> fetchMovies() async {
+    try {
+      homeState = HomeState.loading;
+      final apiResponse = await _cardMovieRepository.getMovies();
+      listFromMovieApi.clear();
+      listFromMovieApi.addAll(apiResponse);
+    } catch (e, st) {
+      homeState = HomeState.error;
+    } finally {
+      homeState = HomeState.loaded;
+    }
+    notifyListeners();
+  }
 
   void orderFinalized() {
     isOrderFinalized = true;

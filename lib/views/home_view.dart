@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:wemovies_mobile_test/models/card_movie_model.dart';
 import 'package:wemovies_mobile_test/viewmodel/main_view_model.dart';
+import 'package:wemovies_mobile_test/widgets/home_card_movie_widget.dart';
 
-import '../models/card_movie_model.dart';
-import '../repositories/card_movie_repository.dart';
-import '../widgets/home_card_movie_widget.dart';
-
-final class HomeView extends StatelessWidget {
-  final CardMovieRepository movieRepository;
+final class HomeView extends StatefulWidget {
   final MainViewModel viewModel;
 
   const HomeView({
     super.key,
-    required this.movieRepository,
     required this.viewModel,
   });
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  @override
+  void initState() {
+    super.initState();
+    widget.viewModel.fetchMovies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,38 +47,92 @@ final class HomeView extends StatelessWidget {
                   fontWeight: FontWeight.w400),
             ),
             Expanded(
-              child: FutureBuilder<List<CardMovieModel>>(
-                future: movieRepository.getMovies(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(
+              child: ListenableBuilder(
+                listenable: widget.viewModel,
+                builder: (context, _) {
+                  return switch (widget.viewModel.homeState) {
+                    HomeState.loading => const Center(
                         child: CircularProgressIndicator(
-                      color: Colors.black,
-                    ));
-                  } else if (snapshot.hasError) {
-                    return const Text('Sem Conexão com a Internet');
-                  } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-                    late List<CardMovieModel> cardMovieList =
-                        snapshot.data ?? [];
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: cardMovieList.length,
-                      scrollDirection: Axis.vertical,
-                      itemBuilder: (context, index) {
-                        final CardMovieModel cardMovieModel =
-                            cardMovieList[index];
-                        return HomeCardMovieWidget(
-                          cardMovieModel: cardMovieModel,
-                          viewModel: viewModel,
-                        );
-                      },
-                    );
-                  } else {
-                    return const Text("Nenhum dado encontrado");
-                  }
+                          color: Colors.black,
+                        ),
+                      ),
+                    HomeState.error => const Text('Sem Conexão com a Internet'),
+                    HomeState.loaded => ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: widget.viewModel.listFromMovieApi.length,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) {
+                          final CardMovieModel cardMovieModel =
+                              widget.viewModel.listFromMovieApi[index];
+                          return HomeCardMovieWidget(
+                            cardMovieModel: cardMovieModel,
+                            viewModel: widget.viewModel,
+                          );
+                        },
+                      ),
+                  };
+
+                  //       if (widget.viewModel.isLoading) {
+                  //         return const Center(
+                  //             child: CircularProgressIndicator(
+                  //           color: Colors.black,
+                  //         ));
+                  //       } else if (widget.viewModel.hasError) {
+                  //         return const Text('Sem Conexão com a Internet');
+                  //       }
+                  //       return ListView.builder(
+                  //         shrinkWrap: true,
+                  //         itemCount: widget.viewModel.listFromMovieApi.length,
+                  //         scrollDirection: Axis.vertical,
+                  //         itemBuilder: (context, index) {
+                  //           final CardMovieModel cardMovieModel =
+                  //               widget.viewModel.listFromMovieApi[index];
+                  //           return HomeCardMovieWidget(
+                  //             cardMovieModel: cardMovieModel,
+                  //             viewModel: widget.viewModel,
+                  //           );
+                  //         },
+                  //       );
+                  //     },
+                  //   ),
+                  // )
+
+                  // Expanded(
+                  //   child: FutureBuilder<List<CardMovieModel>>(
+                  //     future: movieRepository.getMovies(),
+                  //     builder: (context, snapshot) {
+                  //       if (snapshot.connectionState == ConnectionState.waiting) {
+                  //         return const Center(
+                  //             child: CircularProgressIndicator(
+                  //           color: Colors.black,
+                  //         ));
+                  //       } else if (snapshot.hasError) {
+                  //         return const Text('Sem Conexão com a Internet');
+                  //       } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                  //         late List<CardMovieModel> cardMovieList =
+                  //             snapshot.data ?? [];
+                  //         return ListView.builder(
+                  //           shrinkWrap: true,
+                  //           itemCount: cardMovieList.length,
+                  //           scrollDirection: Axis.vertical,
+                  //           itemBuilder: (context, index) {
+                  //             final CardMovieModel cardMovieModel =
+                  //                 cardMovieList[index];
+                  //             return HomeCardMovieWidget(
+                  //               cardMovieModel: cardMovieModel,
+                  //               viewModel: viewModel,
+                  //             );
+                  //           },
+                  //         );
+                  //       } else {
+                  //         return const Text("Nenhum dado encontrado");
+                  //       }
+                  //     },
+                  //   ),
+                  // ),
                 },
               ),
-            ),
+            )
           ],
         ),
       ),

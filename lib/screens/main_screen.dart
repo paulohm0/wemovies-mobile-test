@@ -23,7 +23,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    viewModel = MainViewModel();
+    viewModel = MainViewModel(
+      cardMovieRepository: movieRepository,
+    );
   }
 
   @override
@@ -57,7 +59,6 @@ class _HomeScreenState extends State<HomeScreen> {
             AppNavBarEnum.profile =>
               ProfileView(movieRepository: movieRepository),
             _ => HomeView(
-                movieRepository: movieRepository,
                 viewModel: viewModel,
               ),
           };
