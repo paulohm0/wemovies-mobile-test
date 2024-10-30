@@ -6,6 +6,18 @@ import '../models/card_movie_model.dart';
 final class MainViewModel extends ChangeNotifier {
   AppNavBarEnum selectedIndex = AppNavBarEnum.home;
   List<CardMovieModel> shoppingList = [];
+  bool isOrderFinalized = false;
+
+  void orderFinalized() {
+    isOrderFinalized = true;
+    shoppingList = [];
+    notifyListeners();
+  }
+
+  void orderReset() {
+    isOrderFinalized = false;
+    notifyListeners();
+  }
 
   void onItemTapped(AppNavBarEnum index) {
     selectedIndex = index;
@@ -21,6 +33,11 @@ final class MainViewModel extends ChangeNotifier {
 
   void removeMovieToCart(CardMovieModel movie) {
     shoppingList.remove(movie);
+    notifyListeners();
+  }
+
+  void removeAllMovieToCart(int id) {
+    shoppingList.removeWhere((movie) => movie.idMovie == id);
     notifyListeners();
   }
 

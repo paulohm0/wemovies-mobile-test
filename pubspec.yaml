@@ -8,6 +8,8 @@ environment:
   sdk: '>=3.4.3 <4.0.0'
 
 dependencies:
+  flutter_native_splash: ^2.4.1
+  intl: ^0.19.0
   collection: ^1.18.0
   cached_network_image: ^3.4.1
   dio: ^5.7.0
@@ -32,3 +34,10 @@ flutter:
    - assets/finish.png
    - assets/refresh.png
    - assets/splash.png
+
+flutter_native_splash:
+  color: "#2F2E41"
+  image: assets/splash.png
+  android_12:
+    color: "#2F2E41"
+    image: assets/splash.png
