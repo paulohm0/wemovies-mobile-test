@@ -19,39 +19,50 @@ class ShoppingView extends StatelessWidget {
       child: ListenableBuilder(
         listenable: viewModel,
         builder: (context, child) {
-          return viewModel.isOrderFinalized
-              ? ShoppingCompletedSuccessWidget(
-                  viewModel: viewModel,
-                )
-              : SizedBox(
-                  width: double.infinity,
-                  child: Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Carrinho de Compras',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700),
-                        ),
-                        const SizedBox(height: 24),
-                        Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: viewModel.shoppingList.isEmpty
-                              ? ShoppingCardEmptyWidget(viewModel: viewModel)
-                              : ShoppingMovieListWidget(viewModel: viewModel),
-                        ),
-                      ],
-                    ),
+          return viewModel.isLoading
+              ? Container(
+                  height: MediaQuery.of(context).size.height -
+                      kBottomNavigationBarHeight * 3,
+                  alignment: Alignment.center,
+                  child: const CircularProgressIndicator(
+                    color: Colors.white,
                   ),
-                );
+                )
+              : viewModel.isOrderFinalized
+                  ? ShoppingCompletedSuccessWidget(
+                      viewModel: viewModel,
+                    )
+                  : SizedBox(
+                      width: double.infinity,
+                      child: Padding(
+                        padding: const EdgeInsets.all(24.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Carrinho de Compras',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                            const SizedBox(height: 24),
+                            Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: viewModel.shoppingList.isEmpty
+                                  ? ShoppingCardEmptyWidget(
+                                      viewModel: viewModel)
+                                  : ShoppingMovieListWidget(
+                                      viewModel: viewModel),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
         },
       ),
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wemovies_mobile_test/viewmodel/main_view_model.dart';
 
 import '../enum/app_navbar_enum.dart';
+import '../screens/main_screen.dart';
 import 'navbar_item_widget.dart';
 
 class CustomBottomNavWidget extends StatelessWidget {
@@ -26,7 +27,16 @@ class CustomBottomNavWidget extends StatelessWidget {
                   index: nav.index,
                   isSelected: viewModel.selectedIndex.label == nav.label,
                   onTap: () {
-                    viewModel.onItemTapped(nav);
+                    if (nav == AppNavBarEnum.home &&
+                        viewModel.shoppingList.isEmpty) {
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomeScreen()),
+                          (Route<dynamic> route) => false);
+                    } else {
+                      viewModel.onItemTapped(nav);
+                    }
                   },
                 ),
             ],

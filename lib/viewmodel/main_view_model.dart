@@ -4,7 +4,11 @@ import 'package:wemovies_mobile_test/repositories/card_movie_repository.dart';
 import '../enum/app_navbar_enum.dart';
 import '../models/card_movie_model.dart';
 
-enum HomeState { loading, loaded, error }
+enum HomeState {
+  loading,
+  loaded,
+  error,
+}
 
 final class MainViewModel extends ChangeNotifier {
   final CardMovieRepository _cardMovieRepository;
@@ -12,13 +16,9 @@ final class MainViewModel extends ChangeNotifier {
   AppNavBarEnum selectedIndex = AppNavBarEnum.home;
   List<CardMovieModel> shoppingList = [];
   bool isOrderFinalized = false;
-
   List<CardMovieModel> listFromMovieApi = [];
-
   HomeState homeState = HomeState.loading;
-
   bool isLoading = false;
-  bool hasError = false;
 
   MainViewModel({
     required CardMovieRepository cardMovieRepository,
@@ -38,7 +38,11 @@ final class MainViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void orderFinalized() {
+  void orderFinalized() async {
+    isLoading = true;
+    notifyListeners();
+    await Future.delayed(const Duration(seconds: 3));
+    isLoading = false;
     isOrderFinalized = true;
     shoppingList = [];
     notifyListeners();

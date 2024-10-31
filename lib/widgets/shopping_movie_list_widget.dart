@@ -64,7 +64,7 @@ class ShoppingMovieListWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(4),
                   ),
                 ),
-                onPressed: () {
+                onPressed: () async {
                   viewModel.orderFinalized();
                 },
                 child: const Padding(

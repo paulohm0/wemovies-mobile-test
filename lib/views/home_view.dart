@@ -53,7 +53,7 @@ class _HomeViewState extends State<HomeView> {
                   return switch (widget.viewModel.homeState) {
                     HomeState.loading => const Center(
                         child: CircularProgressIndicator(
-                          color: Colors.black,
+                          color: Colors.white,
                         ),
                       ),
                     HomeState.error => const Text('Sem Conexão com a Internet'),
