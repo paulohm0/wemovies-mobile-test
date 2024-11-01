@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:wemovies_mobile_test/viewmodel/main_view_model.dart';
-import 'package:wemovies_mobile_test/widgets/shopping_card_empty_widget.dart';
-import 'package:wemovies_mobile_test/widgets/shopping_movie_list_widget.dart';
+import 'package:wemovies_mobile_test/widgets/shop/shopping_card_empty_widget.dart';
+import 'package:wemovies_mobile_test/widgets/shop/shopping_movie_list_widget.dart';
 
 import '../repositories/card_movie_repository.dart';
-import '../widgets/shopping_completed_success_widget.dart';
+import '../widgets/shop/shopping_completed_success_widget.dart';
 
 class ShoppingView extends StatelessWidget {
   const ShoppingView(

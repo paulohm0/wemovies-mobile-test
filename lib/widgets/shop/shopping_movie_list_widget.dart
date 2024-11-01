@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wemovies_mobile_test/viewmodel/main_view_model.dart';
-import 'package:wemovies_mobile_test/widgets/shopping_card_movie_widget.dart';
+import 'package:wemovies_mobile_test/widgets/shop/shopping_card_movie_widget.dart';
 
 class ShoppingMovieListWidget extends StatelessWidget {
   const ShoppingMovieListWidget({

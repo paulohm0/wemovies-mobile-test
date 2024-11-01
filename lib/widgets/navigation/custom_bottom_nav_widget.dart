@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wemovies_mobile_test/viewmodel/main_view_model.dart';
 
-import '../enum/app_navbar_enum.dart';
-import '../screens/main_screen.dart';
+import '../../enum/app_navbar_enum.dart';
+import '../../screens/main_screen.dart';
 import 'navbar_item_widget.dart';
 
 class CustomBottomNavWidget extends StatelessWidget {

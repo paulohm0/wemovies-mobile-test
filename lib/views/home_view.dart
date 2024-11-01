@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wemovies_mobile_test/models/card_movie_model.dart';
 import 'package:wemovies_mobile_test/viewmodel/main_view_model.dart';
-import 'package:wemovies_mobile_test/widgets/home_card_movie_widget.dart';
+import 'package:wemovies_mobile_test/widgets/home/home_card_movie_widget.dart';
 
 final class HomeView extends StatefulWidget {
   final MainViewModel viewModel;
@@ -71,65 +71,6 @@ class _HomeViewState extends State<HomeView> {
                         },
                       ),
                   };
-
-                  //       if (widget.viewModel.isLoading) {
-                  //         return const Center(
-                  //             child: CircularProgressIndicator(
-                  //           color: Colors.black,
-                  //         ));
-                  //       } else if (widget.viewModel.hasError) {
-                  //         return const Text('Sem Conexão com a Internet');
-                  //       }
-                  //       return ListView.builder(
-                  //         shrinkWrap: true,
-                  //         itemCount: widget.viewModel.listFromMovieApi.length,
-                  //         scrollDirection: Axis.vertical,
-                  //         itemBuilder: (context, index) {
-                  //           final CardMovieModel cardMovieModel =
-                  //               widget.viewModel.listFromMovieApi[index];
-                  //           return HomeCardMovieWidget(
-                  //             cardMovieModel: cardMovieModel,
-                  //             viewModel: widget.viewModel,
-                  //           );
-                  //         },
-                  //       );
-                  //     },
-                  //   ),
-                  // )
-
-                  // Expanded(
-                  //   child: FutureBuilder<List<CardMovieModel>>(
-                  //     future: movieRepository.getMovies(),
-                  //     builder: (context, snapshot) {
-                  //       if (snapshot.connectionState == ConnectionState.waiting) {
-                  //         return const Center(
-                  //             child: CircularProgressIndicator(
-                  //           color: Colors.black,
-                  //         ));
-                  //       } else if (snapshot.hasError) {
-                  //         return const Text('Sem Conexão com a Internet');
-                  //       } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-                  //         late List<CardMovieModel> cardMovieList =
-                  //             snapshot.data ?? [];
-                  //         return ListView.builder(
-                  //           shrinkWrap: true,
-                  //           itemCount: cardMovieList.length,
-                  //           scrollDirection: Axis.vertical,
-                  //           itemBuilder: (context, index) {
-                  //             final CardMovieModel cardMovieModel =
-                  //                 cardMovieList[index];
-                  //             return HomeCardMovieWidget(
-                  //               cardMovieModel: cardMovieModel,
-                  //               viewModel: viewModel,
-                  //             );
-                  //           },
-                  //         );
-                  //       } else {
-                  //         return const Text("Nenhum dado encontrado");
-                  //       }
-                  //     },
-                  //   ),
-                  // ),
                 },
               ),
             )

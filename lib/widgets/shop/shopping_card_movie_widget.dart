@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:wemovies_mobile_test/models/card_movie_model.dart';
 import 'package:wemovies_mobile_test/viewmodel/main_view_model.dart';
-import 'package:wemovies_mobile_test/widgets/alert_delete_movie_shopping_widget.dart';
+import 'package:wemovies_mobile_test/widgets/shop/shopping_alert_delete_movie_widget.dart';
 
 class ShoppingCardMovieWidget extends StatelessWidget {
   const ShoppingCardMovieWidget({
@@ -86,7 +86,7 @@ class ShoppingCardMovieWidget extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (context) {
-                        return AlertDeleteMovieShoppingWidget(
+                        return ShoppingAlertDeleteMovieWidget(
                           onConfirm: () {
                             viewModel.removeAllMovieToCart(
                                 cardMovieModel.idMovie ?? 0);

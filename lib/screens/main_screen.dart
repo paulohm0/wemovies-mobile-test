@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:wemovies_mobile_test/repositories/card_movie_repository.dart';
 import 'package:wemovies_mobile_test/viewmodel/main_view_model.dart';
-import 'package:wemovies_mobile_test/widgets/custom_bottom_nav_widget.dart';
+import 'package:wemovies_mobile_test/widgets/navigation/custom_bottom_nav_widget.dart';
 
 import '../enum/app_navbar_enum.dart';
 import '../views/home_view.dart';

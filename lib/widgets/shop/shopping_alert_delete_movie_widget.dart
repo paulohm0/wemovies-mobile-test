@@ -2,11 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-class AlertDeleteMovieShoppingWidget extends StatelessWidget {
+class ShoppingAlertDeleteMovieWidget extends StatelessWidget {
   final VoidCallback onConfirm;
   final VoidCallback onCancel;
 
-  const AlertDeleteMovieShoppingWidget({
+  const ShoppingAlertDeleteMovieWidget({
     super.key,
     required this.onConfirm,
     required this.onCancel,
